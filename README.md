@@ -15,7 +15,7 @@ described in
     "Convolutional Neural Networks with Recurrent Neural Filters"
     EMNLP 2018
 
-[[pdf]](https://arxiv.org/pdf/)
+[[pdf]](https://arxiv.org/abs/1808.09315)
 
 BibTeX
 
