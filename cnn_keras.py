@@ -27,6 +27,8 @@ from keras.utils import np_utils
 from sklearn.metrics import accuracy_score
 from proc_data import WordVecs
 
+np.random.seed(1332)
+
 logger = logging.getLogger("cnn_rnf.cnn_keras")
 
 class ConvInputLayer(Layer):
@@ -108,10 +110,8 @@ def train_conv_net(datasets,                # word indices of train/dev/test sen
         model.fit(train_inputs, train_set_y, batch_size=batch_size, epochs=1, verbose=0)
 
         # evaluation
-        dev_pred = model.predict(dev_inputs, batch_size=batch_size, verbose=0).argmax(axis=-1)
-        dev_perf = accuracy_score(dev_pred, dev_set_y)
-        test_pred = model.predict(test_inputs, batch_size=batch_size, verbose=0).argmax(axis=-1)
-        test_perf = accuracy_score(test_pred, test_set_y)
+        dev_perf = model.evaluate(dev_inputs,dev_set_y, batch_size=batch_size, verbose=0)[1]
+        test_perf = model.evaluate(test_inputs,test_set_y, batch_size=batch_size, verbose=0)[1]
         if dev_perf >= best_dev_perf:
             best_dev_perf, best_test_perf = dev_perf, test_perf
         logger.info("Epoch: %d Dev perf: %.3f Test perf: %.3f" %(epo+1, dev_perf*100, test_perf*100))

@@ -16,6 +16,8 @@ import numpy as np
 import cPickle
 import argparse, logging
 
+np.random.seed(1332)
+
 logger = logging.getLogger("cnn_rnf.proc_data")
 
 def build_data(fnames):
